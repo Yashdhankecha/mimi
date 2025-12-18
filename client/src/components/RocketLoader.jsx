@@ -8,6 +8,7 @@ import MimiRocket from '../assets/mimi-rocket.png';
 import popSound from '../assets/sounds/pop.mp3';
 import launchSound from '../assets/sounds/launch.mp3';
 import sweetBgSound from '../assets/sounds/sweet-loading.mp3';
+import MimiWaving from '../assets/mimi-waving.png';
 
 gsap.registerPlugin(useGSAP);
 
@@ -16,6 +17,8 @@ const RocketLoader = ({ onComplete }) => {
   const rocketRef = useRef(null);
   const textRef = useRef(null);
   const cloudsRef = useRef(null);
+  const catRef = useRef(null);
+  const helloRef = useRef(null);
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
 
@@ -130,12 +133,46 @@ const RocketLoader = ({ onComplete }) => {
       duration: 0.3
     }, "<")
 
-    // Slide away
+    // 4. Cat Enters Sequence
+    .fromTo(catRef.current, 
+      { y: 300, opacity: 0, scale: 0.5, rotation: -10 },
+      { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.5)" }
+    , "-=0.2") 
+
+    // Hello Bubble
+    .fromTo(helloRef.current,
+        { scale: 0, opacity: 0, transformOrigin: "bottom left" },
+        { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" }
+    , "<0.3")
+
+    // Sound Effect (Meow!)
+    .call(() => {
+        playPop(); // Using pop sound as placeholder for Meow
+    }, null, "<")
+
+    // Wave Animation (Wobble)
+    .to(catRef.current, {
+        rotation: 10,
+        duration: 0.15,
+        yoyo: true,
+        repeat: 5,
+        ease: "sine.inOut"
+    }, ">")
+
+    // 5. Cat Fades Out
+    .to([catRef.current, helloRef.current], {
+        opacity: 0,
+        y: 50,
+        scale: 0.9,
+        duration: 0.5,
+        delay: 0.5
+    })
+
+    // Final: Slide away container
     .to(containerRef.current, {
       yPercent: -100,
       duration: 0.8,
-      ease: "power2.inOut",
-      delay: 0.2
+      ease: "power2.inOut"
     });
 
   }, { scope: containerRef, dependencies: [hasStarted] });
@@ -209,6 +246,23 @@ const RocketLoader = ({ onComplete }) => {
                 <span className="text-mimi-blue font-bold text-xl uppercase tracking-widest bg-white/80 py-2 rounded-full px-6 shadow-sm">
                     Preparing Launch
                 </span>
+            </div>
+
+            {/* 4. The Surprise Cat */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
+                <div className="relative">
+                    {/* Hello Bubble */}
+                    <div ref={helloRef} className="absolute -top-24 -right-20 bg-white px-6 py-3 rounded-2xl rounded-bl-none shadow-xl border-4 border-mimi-yellow opacity-0">
+                         <span className="text-2xl font-black text-mimi-blue font-heading">Meow! Hello!</span>
+                    </div>
+                    {/* The Cat */}
+                    <img 
+                        ref={catRef}
+                        src={MimiWaving} 
+                        alt="Hello!" 
+                        className="w-64 drop-shadow-2xl opacity-0" 
+                    />
+                </div>
             </div>
         </div>
     </div>
