@@ -42,12 +42,12 @@ const ParentsTrust = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-32 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-12 md:py-32 bg-white relative overflow-hidden">
         {/* Subtle Grid Pattern */}
         <div className="absolute inset-0 opacity-[0.03] pointer-events-none" style={{ backgroundImage: 'radial-gradient(#444 1px, transparent 1px)', backgroundSize: '30px 30px' }}></div>
         
         <div className="container mx-auto px-4 md:px-8 relative z-10">
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
                 
                 {/* Left: 3D Image */}
                 <div className="order-2 md:order-1 flex justify-center relative">

@@ -88,10 +88,10 @@ const Hero = () => {
         />
       </div>
 
-      <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-12 items-center relative z-10">
+      <div className="container mx-auto px-4 md:px-8 grid md:grid-cols-2 gap-4 md:gap-12 items-center relative z-10 h-full">
         
         {/* Left: Text Content */}
-        <div ref={textRef} className="text-center md:text-left space-y-8">
+        <div ref={textRef} className="text-center md:text-left space-y-4 md:space-y-8 md:ml-16 order-2 md:order-1">
             <div className="inline-block relative group cursor-default">
                 <span className="relative z-10 inline-block py-2 px-5 rounded-full bg-white border-2 border-mimi-blue/20 text-mimi-blue font-heading font-black text-sm tracking-widest uppercase shadow-sm group-hover:scale-105 transition-transform">
                     ✨ Spark Curiosity
@@ -99,7 +99,7 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-mimi-blue/20 rounded-full blur-md -z-10 group-hover:blur-lg transition-all" />
             </div>
 
-            <h1 className="text-6xl md:text-[5.5rem] font-heading font-black text-slate-800 leading-[0.95] tracking-tight">
+            <h1 className="text-4xl md:text-[5.5rem] font-heading font-black text-slate-800 leading-[0.95] tracking-tight">
               Start Your <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-mimi-pink to-mimi-yellow relative inline-block">
                 Adventure
@@ -109,14 +109,14 @@ const Hero = () => {
               </span> 
             </h1>
 
-            <p className="text-xl md:text-2xl text-slate-500 font-body font-medium max-w-lg mx-auto md:mx-0 leading-relaxed">
+            <p className="text-lg md:text-2xl text-slate-500 font-body font-medium max-w-lg mx-auto md:mx-0 leading-relaxed">
               Join Mimi in a world of animated stories, games, and magical lessons designed for little explorers.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-5 justify-center md:justify-start pt-2">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-5 justify-center md:justify-start pt-2">
                 <button 
                   onClick={() => document.getElementById('start').scrollIntoView({ behavior: 'smooth' })}
-                  className="relative group overflow-hidden bg-slate-900 text-white text-xl font-heading font-black px-10 py-5 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all"
+                  className="relative group overflow-hidden bg-slate-900 text-white text-lg md:text-xl font-heading font-black px-8 py-3 md:px-10 md:py-5 rounded-[2rem] shadow-xl hover:shadow-2xl hover:-translate-y-1 transition-all flex justify-center items-center"
                 >
                     <span className="relative z-10 flex items-center gap-2">
                         Start Learning 🚀
@@ -126,7 +126,7 @@ const Hero = () => {
                 
                 <button 
                   onClick={() => document.getElementById('parents').scrollIntoView({ behavior: 'smooth' })}
-                  className="bg-white text-slate-700 text-xl font-heading font-black px-10 py-5 rounded-[2rem] shadow-sm border-2 border-slate-100 hover:border-mimi-blue hover:text-mimi-blue hover:-translate-y-1 transition-all"
+                  className="bg-white text-slate-700 text-lg md:text-xl font-heading font-black px-8 py-3 md:px-10 md:py-5 rounded-[2rem] shadow-sm border-2 border-slate-100 hover:border-mimi-blue hover:text-mimi-blue hover:-translate-y-1 transition-all"
                 >
                     👨‍👩‍👧 Parent Guide
                 </button>
@@ -134,12 +134,12 @@ const Hero = () => {
         </div>
 
         {/* Right: 3D Mascot */}
-        <div className="relative flex justify-center perspective-[1000px]">
+        <div className="relative flex justify-center perspective-[1000px] order-1 md:order-2">
            <div ref={heroRef} className="relative z-20">
                <img
                 src={MimiHero3D}
                 alt="Mimi Hero"
-                className="w-full max-w-[550px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] filter saturate-110"
+                className="w-80 md:w-full max-w-[550px] object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.15)] filter saturate-110 mx-auto"
                />
                
                {/* Floating Badges usually found in 3D renders */}

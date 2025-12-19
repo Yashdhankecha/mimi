@@ -3,12 +3,14 @@ import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import useSound from 'use-sound';
 import { Play } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import MimiRocket from '../assets/mimi-rocket.png';
 // Import sounds directly for Vite to handle paths correctly
 import popSound from '../assets/sounds/pop.mp3';
 import launchSound from '../assets/sounds/launch.mp3';
 import sweetBgSound from '../assets/sounds/sweet-loading.mp3';
 import MimiWaving from '../assets/mimi-waving.png';
+import mimiIntroVideo from '../assets/mimi_intro.mp4';
 
 gsap.registerPlugin(useGSAP);
 
@@ -17,10 +19,14 @@ const RocketLoader = ({ onComplete }) => {
   const rocketRef = useRef(null);
   const textRef = useRef(null);
   const cloudsRef = useRef(null);
-  const catRef = useRef(null);
-  const helloRef = useRef(null);
+  
+  // No longer needed refs for cat sequence (removed)
+  // const catRef = useRef(null);
+  // const helloRef = useRef(null);
+
   const [count, setCount] = useState(0);
   const [hasStarted, setHasStarted] = useState(false);
+  const [showVideo, setShowVideo] = useState(false);
 
   // Sound Effects
   const [playPop] = useSound(popSound, { volume: 0.15 });
@@ -70,10 +76,7 @@ const RocketLoader = ({ onComplete }) => {
     if (!hasStarted) return; // Wait for start
 
     const tl = gsap.timeline({
-      onComplete: () => {
-        stopSweet();
-        if (onComplete) onComplete(); 
-      }
+      // We manually handle completion now
     });
 
     // 1. Idle / Revving State (0-80%)
@@ -133,55 +136,31 @@ const RocketLoader = ({ onComplete }) => {
       duration: 0.3
     }, "<")
 
-    // 4. Cat Enters Sequence
-    .fromTo(catRef.current, 
-      { y: 300, opacity: 0, scale: 0.5, rotation: -10 },
-      { y: 0, opacity: 1, scale: 1, rotation: 0, duration: 0.6, ease: "back.out(1.5)" }
-    , "-=0.2") 
-
-    // Hello Bubble
-    .fromTo(helloRef.current,
-        { scale: 0, opacity: 0, transformOrigin: "bottom left" },
-        { scale: 1, opacity: 1, duration: 0.4, ease: "elastic.out(1, 0.5)" }
-    , "<0.3")
-
-    // Sound Effect (Meow!)
+    // TRIGGER VIDEO START
     .call(() => {
-        playPop(); // Using pop sound as placeholder for Meow
-    }, null, "<")
-
-    // Wave Animation (Wobble)
-    .to(catRef.current, {
-        rotation: 10,
-        duration: 0.15,
-        yoyo: true,
-        repeat: 5,
-        ease: "sine.inOut"
-    }, ">")
-
-    // 5. Cat Fades Out
-    .to([catRef.current, helloRef.current], {
-        opacity: 0,
-        y: 50,
-        scale: 0.9,
-        duration: 0.5,
-        delay: 0.5
-    })
-
-    // Final: Slide away container
-    .to(containerRef.current, {
-      yPercent: -100,
-      duration: 0.8,
-      ease: "power2.inOut"
+        setShowVideo(true);
     });
 
   }, { scope: containerRef, dependencies: [hasStarted] });
+
+  const handleVideoEnd = () => {
+        // Slide away container to reveal app
+        gsap.to(containerRef.current, {
+            yPercent: -100,
+            duration: 0.8,
+            ease: "power2.inOut",
+            onComplete: () => {
+                stopSweet();
+                if (onComplete) onComplete();
+            }
+        });
+  };
 
   // Initial "Click to Start" View
   if (!hasStarted) {
     return (
         <div className="fixed inset-0 z-[100] bg-sky-100 flex items-center justify-center">
-            <button 
+             <button 
                 onClick={handleStart}
                 className="group relative flex flex-col items-center gap-4 transition-transform hover:scale-105"
             >
@@ -247,24 +226,27 @@ const RocketLoader = ({ onComplete }) => {
                     Preparing Launch
                 </span>
             </div>
-
-            {/* 4. The Surprise Cat */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-30">
-                <div className="relative">
-                    {/* Hello Bubble */}
-                    <div ref={helloRef} className="absolute -top-24 -right-20 bg-white px-6 py-3 rounded-2xl rounded-bl-none shadow-xl border-4 border-mimi-yellow opacity-0">
-                         <span className="text-2xl font-black text-mimi-blue font-heading">Meow! Hello!</span>
-                    </div>
-                    {/* The Cat */}
-                    <img 
-                        ref={catRef}
-                        src={MimiWaving} 
-                        alt="Hello!" 
-                        className="w-64 drop-shadow-2xl opacity-0" 
-                    />
-                </div>
-            </div>
         </div>
+
+        {/* Video Overlay - Plays after rocket launch */}
+        <AnimatePresence>
+            {showVideo && (
+                <motion.div 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 z-[200] bg-black flex items-center justify-center"
+                >
+                    <video 
+                        src={mimiIntroVideo} 
+                        autoPlay 
+                        className="w-full h-full object-cover"
+                        onEnded={handleVideoEnd}
+                        muted={false}
+                    />
+                </motion.div>
+            )}
+        </AnimatePresence>
     </div>
   );
 };

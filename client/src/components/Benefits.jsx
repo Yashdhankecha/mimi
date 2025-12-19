@@ -56,21 +56,21 @@ const Benefits = () => {
   ];
 
   return (
-    <section ref={containerRef} className="py-32 bg-amber-50/50 relative overflow-hidden">
+    <section ref={containerRef} className="py-12 md:py-32 bg-amber-50/50 relative overflow-hidden">
         {/* Decorative Circles */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-amber-200/20 rounded-full blur-[100px] -translate-y-1/2 translate-x-1/2" />
         <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-200/20 rounded-full blur-[100px] translate-y-1/3 -translate-x-1/3" />
 
         <div className="container mx-auto px-4 md:px-8 relative z-10">
             {/* Header */}
-            <div className="text-center mb-20">
+            <div className="text-center mb-10 md:mb-20">
                  <span className="text-amber-500 font-heading font-black tracking-wider uppercase bg-white px-6 py-2 rounded-full shadow-sm text-sm mb-6 inline-block">why Mimi?</span>
                 <h2 className="text-5xl md:text-7xl font-heading font-black text-slate-800">
                     Trusted by <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-orange-500">Super Parents!</span>
                 </h2>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-16 items-center">
+            <div className="grid md:grid-cols-2 gap-8 md:gap-16 items-center">
                 {/* Left: Content */}
                 <div ref={listRef} className="space-y-6 md:pl-8 order-2 md:order-1">
                     {benefits.map((benefit, index) => (

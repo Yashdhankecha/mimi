@@ -40,7 +40,7 @@ const VideoPreview = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-32 bg-sky-50 relative overflow-hidden perspective-[2000px]">
+    <section ref={containerRef} className="py-12 md:py-32 bg-sky-50 relative overflow-hidden perspective-[2000px]">
         {/* Background blobs */}
         <div className="absolute top-10 left-[-50px] w-96 h-96 bg-mimi-yellow/20 rounded-full blur-[80px] opacity-60 mix-blend-multiply" />
         <div className="absolute bottom-10 right-[-50px] w-[500px] h-[500px] bg-mimi-pink/20 rounded-full blur-[100px] opacity-60 mix-blend-multiply" />
@@ -50,7 +50,7 @@ const VideoPreview = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mb-16"
+                className="mb-8 md:mb-16"
             >
                 <span className="text-mimi-pink font-heading font-black tracking-wider uppercase bg-white px-6 py-2 rounded-full shadow-sm text-sm mb-6 inline-block">Watch & Discover</span>
                 <h2 className="text-5xl md:text-7xl text-gray-800 mb-6 font-black">

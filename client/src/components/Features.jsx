@@ -36,13 +36,13 @@ const Features = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-32 bg-white relative overflow-hidden">
+    <section ref={containerRef} className="py-12 md:py-32 bg-white relative overflow-hidden">
        {/* Blobs */}
        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-mimi-yellow/10 rounded-full blur-[100px] -z-10 translate-x-1/3 -translate-y-1/3" />
        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-mimi-pink/10 rounded-full blur-[120px] -z-10 -translate-x-1/3 translate-y-1/3" />
 
       <div className="container mx-auto px-4 md:px-8">
-        <div className="text-center mb-24 relative">
+        <div className="text-center mb-10 md:mb-24 relative">
           <motion.span 
             initial={{ opacity: 0, scale: 0.5 }}
             whileInView={{ opacity: 1, scale: 1 }}

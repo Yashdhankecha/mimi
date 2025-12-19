@@ -47,7 +47,7 @@ const CTA = () => {
     }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="py-24 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden text-slate-900">
+    <section ref={containerRef} className="py-12 md:py-24 bg-gradient-to-b from-white to-blue-50 relative overflow-hidden text-slate-900">
       {/* Subtle Texture */}
       <div className="absolute inset-0 opacity-[0.4]" style={{ backgroundImage: 'radial-gradient(#cbd5e1 1px, transparent 1px)', backgroundSize: '30px 30px' }} />
       
@@ -56,13 +56,13 @@ const CTA = () => {
       <div className="absolute -bottom-40 right-0 w-96 h-96 bg-yellow-100/50 rounded-full blur-[80px]" />
 
       <div className="container mx-auto px-4 md:px-8 relative z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-12">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-8 md:gap-12">
             
             {/* Left: Content */}
-            <div ref={contentRef} className="md:w-1/2 text-center md:text-left">
+            <div ref={contentRef} className="md:w-1/2 text-center md:text-left md:ml-16">
                  <h2 className="text-4xl md:text-6xl font-heading font-black mb-6 leading-tight text-slate-900">
                     Ready for the <br className="hidden md:block" />
-                    <span className="text-mimi-blue relative inline-block">
+                    <span className="text-mimi-green relative inline-block">
                         Fun?
                         <svg className="absolute w-full h-3 bottom-1 left-0 text-mimi-yellow/40 -z-10" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 15 100 5" stroke="currentColor" strokeWidth="8" fill="none" /></svg>
                     </span>
@@ -86,7 +86,7 @@ const CTA = () => {
                      <motion.button
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
-                        className="bg-mimi-blue text-white text-lg font-heading font-black px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
+                        className="bg-mimi-green text-white text-lg font-heading font-black px-8 py-4 rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all flex items-center justify-center gap-2"
                      >
                         <span>🚀</span> Get Started Free
                      </motion.button>
